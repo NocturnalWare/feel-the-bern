@@ -18,3 +18,4 @@ Route::get('/', ['as' => 'home', 'uses' => function () {
 Route::resource('turnouts', 'TurnoutsController');
 Route::resource('polls', 'PollsController');
 Route::post('polls/updatepoll', ['as' => 'updatepoll', 'uses' => 'PollsController@updatepoll']);
+Route::get('polls/destroypoll/{id?}', ['as' => 'destroypoll', 'uses' => 'PollsController@destroypoll']);

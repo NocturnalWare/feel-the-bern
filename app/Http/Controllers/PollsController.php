@@ -112,8 +112,9 @@ class PollsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroypoll($id)
     {
-        //
+        Poll::find($id)->delete();
+        return redirect()->route('home');
     }
 }

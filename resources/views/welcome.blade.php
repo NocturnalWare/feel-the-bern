@@ -22,7 +22,16 @@
     
     <!-- Bootstrap JS -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-72639111-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
         <style>
                         body {
                     background-color: #fff;
@@ -49,19 +58,19 @@
                                 <label>2004</label><input name="turnout_2004" value="{{$state->turnout['turnout_2004']}}">
                             </div>
                             <div class="col-sm-12">
-                                <label>Hillary</label> {{$state->candidateAvg('clinton')}}
+                                <label>Hillary</label> {{$state->estimateVotes('clinton', '2004')}}
                             </div>
                             <div class="col-sm-12">
-                                <label>Bernie</label> {{$state->candidateAvg('sanders')}}
+                                <label>Bernie</label> {{$state->estimateVotes('sanders', '2004')}}
                             </div>
                             <div class="col-sm-12">
                                 <label>2008</label><input name="turnout_2008" value="{{$state->turnout['turnout_2008']}}">
                             </div>
                             <div class="col-sm-12">
-                                <label>Hillary</label> {{$state->candidateAvg('clinton')}}
+                                <label>Hillary</label> {{$state->estimateVotes('clinton', '2008')}}
                             </div>
                             <div class="col-sm-12">
-                                <label>Bernie</label> {{$state->candidateAvg('sanders')}}
+                                <label>Bernie</label> {{$state->estimateVotes('sanders', '2008')}}
                             </div>
                             <div class="col-sm-12">
                                 <button type="submit" class="btn btn-primary pull-right">Update</button>
@@ -131,7 +140,10 @@
                                 <input type="hidden" value="{{csrf_token()}}" name="_token">
                                 <input type="hidden" value="{{$state->id}}" name="state_id">
                                 <input type="hidden" value="{{$poll->id}}" name="poll_id">
-                                <td><input style="max-width:100px;" name="poll_name" value="{{$poll->poll_name}}"></td>
+                                <td>
+                                    <a class="btn btn-warning btn-xs href="{{route('destroypoll', $poll->id)}}" method="post"><span><i class="fa fa-trash"></i></span></a>
+                                    <input style="max-width:100px;" name="poll_name" value="{{$poll->poll_name}}">
+                                </td>
                                 <td><input style="max-width:100px;" name="poll_start_date" value="{{Carbon::parse($poll->poll_start_date)->format('m/d/Y')}}" class="datepicker"></td>
                                 <td><input style="max-width:100px;" name="poll_end_date" value="{{Carbon::parse($poll->poll_end_date)->format('m/d/Y')}}" class="datepicker"></td>
                                 <td><input style="max-width:100px;" name="sample" value="{{$poll->sample}}"></td>
@@ -142,11 +154,12 @@
                                 <td><button class="btn btn-sm" type="submit">Update</button></td><tr>
                             </tbody>
                             </form>
+
                     @endforeach
                         <td colspan="5"></td>
-                        <td>{{$state->candidateAvg('clinton')}}</td>
-                        <td>{{$state->candidateAvg('sanders')}}</td>
-                        <td>{{$state->candidateAvg('omalley')}}</td>
+                        <td>{{$state->candidateAvg('clinton')}}%</td>
+                        <td>{{$state->candidateAvg('sanders')}}%</td>
+                        <td>{{$state->candidateAvg('omalley')}}%</td>
                         </table>
 
                         <table class="table" style="background:#fff">
