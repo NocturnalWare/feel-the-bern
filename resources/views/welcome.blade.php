@@ -85,13 +85,13 @@
                                  </th>
                                 <th>2008<br>
                                     {{$state->estimateVotes('undecided', '2008')}} Undecided<br>
-                                    <span class="btn btn-xs btn-warning">Clinton {{$state->estimateUndecidedVotes('clinton', '2004')}}</span>
-                                    <span class="btn btn-xs btn-success">Sanders {{$state->estimateUndecidedVotes('sanders', '2004')}}</span>
+                                    <span class="btn btn-xs btn-warning">Clinton {{$state->estimateUndecidedVotes('clinton', '2008')}}</span>
+                                    <span class="btn btn-xs btn-success">Sanders {{$state->estimateUndecidedVotes('sanders', '2008')}}</span>
                                 </th>
                                 <th>2016<br>
                                     {{$state->estimateVotes('undecided', '2016')}} Undecided<br>
-                                    <span class="btn btn-xs btn-warning">Clinton {{$state->estimateUndecidedVotes('clinton', '2004')}}</span>
-                                    <span class="btn btn-xs btn-success">Sanders {{$state->estimateUndecidedVotes('sanders', '2004')}}</span>
+                                    <span class="btn btn-xs btn-warning">Clinton {{$state->estimateUndecidedVotes('clinton', '2016')}}</span>
+                                    <span class="btn btn-xs btn-success">Sanders {{$state->estimateUndecidedVotes('sanders', '2016')}}</span>
                                 </th>
                                 <th>Total Difference<br>
                                 </th>
