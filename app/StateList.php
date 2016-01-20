@@ -25,7 +25,7 @@ class StateList extends Model
     	if($parts == 0){
     		$parts = 1;
     	}
-    	return $sum / $parts;
+    	return number_format($sum / $parts, 2);
     }
 
     public function turnoutByYear($year){
