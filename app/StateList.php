@@ -51,10 +51,10 @@ class StateList extends Model
     }
 
     public function estimateVotes($candidate, $year){
-    	return ($this->candidateAvg($candidate)/100) * ($this->turnoutByYear($year));
+    	return round(($this->candidateAvg($candidate)/100) * ($this->turnoutByYear($year)));
     }
 
     public function estimateVictory($candidate1, $candidate2){
-    	return ($this->estimateVotes($candidate1, '2016') + $this->estimateUndecidedVotes($candidate1, '2016')) - ($this->estimateVotes($candidate2, '2016') + $this->estimateUndecidedVotes($candidate2, '2016'));
+    	return round(($this->estimateVotes($candidate1, '2016') + $this->estimateUndecidedVotes($candidate1, '2016')) - ($this->estimateVotes($candidate2, '2016') + $this->estimateUndecidedVotes($candidate2, '2016')));
     }
 }
