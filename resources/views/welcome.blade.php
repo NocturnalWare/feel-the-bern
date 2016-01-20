@@ -45,8 +45,20 @@
         </style>
     </head>
     <body>
+    <select class="form-control col-sm-12" id="showState" value="15">
+        @foreach(\App\StateList::all() as $state)
+            <option value="{{$state->id}}" @if($state->id == 15) selected @endif >{{$state->state_name}}</option>
+        @endforeach
+    </select>
+
+    <script type="text/javascript">
+        $('#showState').on('change', function(){
+            $('.states').addClass('hidden');
+            $('#show_state_'+$(this).val()).removeClass('hidden');
+        });
+    </script>
         @foreach(\App\StateList::with('turnout', 'polls')->get() as $state)
-        <div class="col-sm-12">
+        <div class="col-sm-12 states @if($state->id !== 15) hidden @endif" id="show_state_{{$state->id}}">
             <h1>{{$state->state_name}}</h1>
                 <div class="col-sm-12 col-md-3 well well-sm">
                     <form action="{{route('turnouts.store')}}" method="post">
