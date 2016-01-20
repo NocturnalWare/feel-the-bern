@@ -149,7 +149,7 @@
                                 <input type="hidden" value="{{$state->id}}" name="state_id">
                                 <input type="hidden" value="{{$poll->id}}" name="poll_id">
                                 <td>
-                                    <a class="btn btn-warning btn-xs href="{{route('destroypoll', $poll->id)}}" method="post"><span><i class="fa fa-trash"></i></span></a>
+                                    <a class="btn btn-warning btn-xs" href="{{route('destroypoll', $poll->id)}}" method="post"><span><i class="fa fa-trash"></i></span></a>
                                     <input style="max-width:100px;" name="poll_name" value="{{$poll->poll_name}}">
                                 </td>
                                 <td><input style="max-width:100px;" name="poll_start_date" value="{{Carbon::parse($poll->poll_start_date)->format('m/d/Y')}}" class="datepicker"></td>
