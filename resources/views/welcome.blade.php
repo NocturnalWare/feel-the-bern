@@ -54,24 +54,20 @@
                         <input type="hidden" value="{{$state->id}}" name="state_id">
                         <center>
                             <h3>Turnout Data ({{$state->state_abbr}})</h4>
-                            <div class="col-sm-12">
-                                <label>2004</label><input name="turnout_2004" value="{{$state->turnout['turnout_2004']}}">
+                            <div class="col-sm-6">
+                                <label>2004</label>
                             </div>
-                            <div class="col-sm-12">
-                                <label>Hillary</label> {{$state->estimateVotes('clinton', '2004')}}
+                            <div class="col-sm-6">
+                                <input name="turnout_2004" value="{{$state->turnout['turnout_2004']}}">
                             </div>
-                            <div class="col-sm-12">
-                                <label>Bernie</label> {{$state->estimateVotes('sanders', '2004')}}
+
+                            <div class="col-sm-6">
+                                <label>2008</label>
                             </div>
-                            <div class="col-sm-12">
-                                <label>2008</label><input name="turnout_2008" value="{{$state->turnout['turnout_2008']}}">
+                            <div class="col-sm-6">
+                                <input name="turnout_2008" value="{{$state->turnout['turnout_2008']}}">
                             </div>
-                            <div class="col-sm-12">
-                                <label>Hillary</label> {{$state->estimateVotes('clinton', '2008')}}
-                            </div>
-                            <div class="col-sm-12">
-                                <label>Bernie</label> {{$state->estimateVotes('sanders', '2008')}}
-                            </div>
+                            <div class="col-sm-12">&nbsp</div>
                             <div class="col-sm-12">
                                 <button type="submit" class="btn btn-primary pull-right">Update</button>
                             </div>
