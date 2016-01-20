@@ -24,7 +24,7 @@ Route::get('/fixdata', function(){
 		$turnout->state_id = 15;
 		$turnout->save();
 	}
-})
+});
 
 Route::resource('turnouts', 'TurnoutsController');
 Route::resource('polls', 'PollsController');
