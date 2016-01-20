@@ -39,7 +39,21 @@ class PollsController extends Controller
      */
     public function store(Request $request)
     {
-        Poll::create($request->except('_token'));
+        $data = $request->except('poll_id', '_token');
+
+        //fix dates from datepicker
+        $data['poll_start_date'] = \Carbon::parse($data['poll_start_date']);
+        $data['poll_end_date'] = \Carbon::parse($data['poll_end_date']);
+
+        //calc undecided
+        $data['undecided'] = 100 - ($data['clinton'] + $data['omalley'] + $data['sanders']);
+
+        if($data['undecided'] < 0 || $data['undecided'] > 100){
+            return redirect()->route('home');
+        }
+
+        Poll::create($data);
+
         return redirect()->route('home');
     }
 
@@ -88,7 +102,7 @@ class PollsController extends Controller
         }
 
         Poll::find($request->input('poll_id'))->update($data);
-        
+
         return redirect()->route('home');
     }
 

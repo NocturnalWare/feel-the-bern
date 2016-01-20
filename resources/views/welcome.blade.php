@@ -139,7 +139,6 @@
                                 <td><input style="max-width:100px;" name="clinton" value="{{$poll->clinton}}"></td>
                                 <td><input style="max-width:100px;" name="sanders" value="{{$poll->sanders}}"></td>
                                 <td><input style="max-width:100px;" name="omalley" value="{{$poll->omalley}}"></td>
-                                <td><input style="max-width:100px;"  value="{{$poll->undecided}}"></td>
                                 <td><button class="btn btn-sm" type="submit">Update</button></td><tr>
                             </tbody>
                             </form>
