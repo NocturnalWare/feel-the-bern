@@ -57,7 +57,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Bernie Poll Analysis</a>
+      <a class="navbar-brand" href="#">Bernie Poll Analysis</a><br>
+      <a class="btn btn-sm btn-primary" href="{{route('auth.login')}}">Log in</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -113,7 +114,9 @@
                             </div>
                             <div class="col-sm-12">&nbsp</div>
                             <div class="col-sm-12">
-                                <button type="submit" class="btn btn-primary pull-right">Update</button>
+                                @if(Auth::check())    
+                                    <button type="submit" class="btn btn-primary pull-right">Update</button>
+                                @endif
                             </div>
                         </center>
                     </form>
@@ -123,19 +126,19 @@
                                 <th>
                                     2004<br>
                                     {{$state->estimateVotes('undecided', '2004')}} Undecided<br>
-                                    <span class="btn btn-xs btn-warning">Clinton {{$state->estimateUndecidedVotes('clinton', '2004')}}</span>
-                                    <span class="btn btn-xs btn-success">Sanders {{$state->estimateUndecidedVotes('sanders', '2004')}}</span>
+                                    <span class="btn btn-xs">Clinton {{$state->estimateUndecidedVotes('clinton', '2004')}}</span><br>
+                                    <span class="btn btn-xs">Sanders {{$state->estimateUndecidedVotes('sanders', '2004')}}</span>
                                     <br>
                                  </th>
                                 <th>2008<br>
                                     {{$state->estimateVotes('undecided', '2008')}} Undecided<br>
-                                    <span class="btn btn-xs btn-warning">Clinton {{$state->estimateUndecidedVotes('clinton', '2008')}}</span>
-                                    <span class="btn btn-xs btn-success">Sanders {{$state->estimateUndecidedVotes('sanders', '2008')}}</span>
+                                    <span class="btn btn-xs">Clinton {{$state->estimateUndecidedVotes('clinton', '2008')}}</span><br>
+                                    <span class="btn btn-xs">Sanders {{$state->estimateUndecidedVotes('sanders', '2008')}}</span>
                                 </th>
                                 <th>2016<br>
-                                    {{$state->estimateVotes('undecided', '2016')}} Undecided<br>
-                                    <span class="btn btn-xs btn-warning">Clinton {{$state->estimateUndecidedVotes('clinton', '2016')}}</span>
-                                    <span class="btn btn-xs btn-success">Sanders {{$state->estimateUndecidedVotes('sanders', '2016')}}</span>
+                                    +{{$state->estimateVotes('undecided', '2016')}} Undecided<br>
+                                    <span class="btn btn-xs">Clinton +{{$state->estimateUndecidedVotes('clinton', '2016')}}</span><br>
+                                    <span class="btn btn-xs">Sanders +{{$state->estimateUndecidedVotes('sanders', '2016')}}</span>
                                 </th>
                                 <th>Total Difference<br>
                                 </th>
@@ -158,9 +161,11 @@
                                 </td>
                             </table>
                     <h3>Local Polling Data ({{$state->state_abbr}})
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_poll_{{$state->id}}">
-                          Add Poll <i class="fa fa-plus"></i>
-                        </button>
+                        @if(Auth::check())
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_poll_{{$state->id}}">
+                              Add Poll <i class="fa fa-plus"></i>
+                            </button>
+                        @endif
                         <div class="col-sm-12">
                         </div>
                     </h3>
@@ -181,8 +186,10 @@
                                 <input type="hidden" value="{{$state->id}}" name="state_id">
                                 <input type="hidden" value="{{$poll->id}}" name="poll_id">
                                 <td>
-                                    <a class="btn btn-warning btn-xs" href="{{route('destroypoll', $poll->id)}}" method="post"><span><i class="fa fa-trash"></i></span></a>
-                                    <input style="max-width:100px;" name="poll_name" value="{{$poll->poll_name}}">
+                                    @if(Auth::check())
+                                            <a class="btn btn-warning btn-xs href="{{route('destroypoll', $poll->id)}}" method="post"><span><i class="fa fa-trash"></i></span></a>
+                                    @endif
+                                            <input style="max-width:100px;" name="poll_name" value="{{$poll->poll_name}}">
                                 </td>
                                 <td><input style="max-width:100px;" name="poll_start_date" value="{{Carbon::parse($poll->poll_start_date)->format('m/d/Y')}}" class="datepicker"></td>
                                 <td><input style="max-width:100px;" name="poll_end_date" value="{{Carbon::parse($poll->poll_end_date)->format('m/d/Y')}}" class="datepicker"></td>
@@ -191,7 +198,11 @@
                                 <td><input style="max-width:100px;" name="clinton" value="{{$poll->clinton}}"></td>
                                 <td><input style="max-width:100px;" name="sanders" value="{{$poll->sanders}}"></td>
                                 <td><input style="max-width:100px;" name="omalley" value="{{$poll->omalley}}"></td>
-                                <td><button class="btn btn-sm" type="submit">Update</button></td><tr>
+                                <td>
+                                    @if(Auth::check())
+                                        <button class="btn btn-sm" type="submit">Update</button>
+                                    @endif
+                                </td><tr>
                             </tbody>
                             </form>
 
@@ -207,6 +218,7 @@
 
                             </tbody>
                         </table>
+
 
                     <!-- Modal -->
                     <div class="modal fade" id="add_poll_{{$state->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
