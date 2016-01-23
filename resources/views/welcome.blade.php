@@ -64,11 +64,11 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-            <li>
-            <h1>Currently Viewing  </h1>
+            <li style="padding-right:30px;">
+                <h1>Currently Viewing  </h1>    
             </li>
             <li>
-            <select class="form-control" style="height:300%;font-size:3em" id="showState" value="15">
+            <select class="form-control" style="text-align:center;height:300%;font-size:3em" id="showState" value="15">
                 @foreach(\App\StateList::all() as $state)
                     <option value="{{$state->id}}" @if($state->id == 15) selected @endif >{{$state->state_name}}</option>
                 @endforeach
@@ -124,40 +124,60 @@
                 <div class="col-sm-12 col-md-9 well well-sm">
                             <table class="table">
                                 <th>
-                                    2004<br>
-                                    {{$state->estimateVotes('undecided', '2004')}} Undecided<br>
-                                    <span class="btn btn-xs">Clinton {{$state->estimateUndecidedVotes('clinton', '2004')}}</span><br>
-                                    <span class="btn btn-xs">Sanders {{$state->estimateUndecidedVotes('sanders', '2004')}}</span>
-                                    <br>
-                                 </th>
-                                <th>2008<br>
-                                    {{$state->estimateVotes('undecided', '2008')}} Undecided<br>
-                                    <span class="btn btn-xs">Clinton {{$state->estimateUndecidedVotes('clinton', '2008')}}</span><br>
-                                    <span class="btn btn-xs">Sanders {{$state->estimateUndecidedVotes('sanders', '2008')}}</span>
+                                    <div style="border-bottom:1px solid #000;text-align:center" class="col-sm-12">
+                                        2004<br>
+                                        {{$state->estimateVotes('undecided', '2004')}} Undecided<br>
+                                    </div>
                                 </th>
-                                <th>2016<br>
-                                    +{{$state->estimateVotes('undecided', '2016')}} Undecided<br>
-                                    <span class="btn btn-xs">Clinton +{{$state->estimateUndecidedVotes('clinton', '2016')}}</span><br>
-                                    <span class="btn btn-xs">Sanders +{{$state->estimateUndecidedVotes('sanders', '2016')}}</span>
+                                <th>
+                                    <div style="border-bottom:1px solid #000;text-align:center" class="col-sm-12">
+                                        2008<br>
+                                        {{$state->estimateVotes('undecided', '2008')}} Undecided<br>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div style="border-bottom:1px solid #000;text-align:center" class="col-sm-12">
+                                    2016<br>
+                                    {{$state->estimateVotes('undecided', '2016')}} Undecided<br>
                                 </th>
                                 <th>Total Difference<br>
                                 </th>
                                 <tr>
                                 <td>
-                                    Clinton {{$state->estimateVotes('clinton', '2004')}}<br>                    
-                                    Sanders {{$state->estimateVotes('sanders', '2004')}}<br>                
+                                        
+                                    <div style="border:1px solid #000" class="col-sm-12 btn btn-sm">
+                                        Clinton {{$state->estimateVotes('clinton', '2004')}}                    
+                                        ({{$state->estimateUndecidedVotes('clinton', '2004')}} Undecided)<br>
+                                    </div>
+                                    <div style="border:1px solid #000;border-top:0px;" class="col-sm-12 btn btn-sm">
+                                        Sanders {{$state->estimateVotes('sanders', '2004')}}
+                                        ({{$state->estimateUndecidedVotes('sanders', '2004')}} Undecided)<br>
+                                    </div>
                                 </td>
                                 <td>
-                                    Clinton {{$state->estimateVotes('clinton', '2008')}}<br>                     
-                                    Sanders {{$state->estimateVotes('sanders', '2008')}}<br>                                      
+                                    <div style="border:1px solid #000" class="col-sm-12 btn btn-sm">
+                                        Clinton {{$state->estimateVotes('clinton', '2008')}}                     
+                                        ({{$state->estimateUndecidedVotes('clinton', '2008')}} Undecided)
+                                    </div>
+                                    <div style="border:1px solid #000;border-top:0px;" class="col-sm-12 btn btn-sm">
+                                        Sanders {{$state->estimateVotes('sanders', '2008')}} 
+                                        ({{$state->estimateUndecidedVotes('sanders', '2008')}} Undecided)
+                                    </div>
+
                                 </td>
                                 <td>
-                                    Clinton {{$state->estimateVotes('clinton', '2016')}}<br>                     
-                                    Sanders {{$state->estimateVotes('sanders', '2016')}}<br>  
+                                    <div style="border:1px solid #000" class="col-sm-12 btn btn-sm">
+                                        Clinton {{$state->estimateVotes('clinton', '2016')}}
+                                        ({{$state->estimateUndecidedVotes('clinton', '2016')}} Undecided)
+                                    </div>
+                                    <div style="border:1px solid #000;border-top:0px;" class="col-sm-12 btn btn-sm">
+                                        Sanders {{$state->estimateVotes('sanders', '2016')}}
+                                        ({{$state->estimateUndecidedVotes('sanders', '2016')}} Undecided)
+                                    </div>
                                 </td>
                                 <td>
-                                    <span class="btn btn-xs btn-warning">Clinton {{$state->estimateVictory('clinton', 'sanders')}}</span><br>
-                                    <span class="btn btn-xs btn-success">Sanders {{$state->estimateVictory('sanders', 'clinton')}}</span>                  
+                                    <span class="btn btn-sm btn-warning col-sm-12">Clinton {{$state->estimateVictory('clinton', 'sanders')}}</span><br>
+                                    <span class="btn btn-sm btn-success col-sm-12">Sanders {{$state->estimateVictory('sanders', 'clinton')}}</span>                  
                                 </td>
                             </table>
                     <h3>Local Polling Data ({{$state->state_abbr}})
